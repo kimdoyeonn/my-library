@@ -1,8 +1,6 @@
-import Image from 'next/image';
-// import Data from '@/data/books.json';
 import DarkModeToggle from '@/components/dark-mode-toggle';
-import AddBookDialog from '@/components/add-book-dialog';
 import BookList from '@/components/book-list';
+import AdminSection from '@/components/admin-section';
 
 export default function Home() {
   return (
@@ -10,7 +8,7 @@ export default function Home() {
       <nav className='w-full py-4 lg:pt-12 flex justify-between'>
         <div className='text-2xl font-bold'>내 도서관</div>
         <div className='flex items-center gap-2'>
-          <AddBookDialog />
+          <AdminSection />
           <DarkModeToggle />
         </div>
       </nav>

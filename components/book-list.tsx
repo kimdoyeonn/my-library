@@ -1,6 +1,5 @@
 import { db } from '@/lib/db';
 import { Book as BookType } from '@prisma/client';
-import axios from 'axios';
 import Image from 'next/image';
 
 const Book = ({ book }: { book: BookType }) => {
