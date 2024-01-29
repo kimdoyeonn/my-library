@@ -1,0 +1,28 @@
+{
+  "books": [
+    {
+      "title": "어린이라는 세계",
+      "author": "김소영",
+      "publisher": "사계절",
+      "image_url": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791160946918.jpg"
+    },
+    {
+      "title": "데일 카네기의 인간관계론",
+      "author": "데일 카네기",
+      "publisher": "미르북",
+      "image_url": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791187142560.jpg"
+    },
+    {
+      "title": "일본어 문법 무작정 따라하기",
+      "author": "후지이 아사리",
+      "publisher": "길벗",
+      "image_url": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791140702978.jpg"
+    },
+    {
+      "title": "일본어 무작정 따라하기(완전판)",
+      "author": "후지이 아사리",
+      "publisher": "길벗",
+      "image_url": "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791165219956.jpg"
+    }
+  ]
+}
