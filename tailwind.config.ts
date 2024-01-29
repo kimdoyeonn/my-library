@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      aspectRatio: {
+        book: '3/4',
+      },
       fontFamily: {
         sansKr: ['var(--font-sans)', ...fontFamily.sans],
       },

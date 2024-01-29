@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const inter = Noto_Sans_KR({
   subsets: ['latin'],
@@ -21,12 +22,16 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={cn(
-          'min-h-screen font-sans-kr antialiased font-bold',
-          inter.className
-        )}
+        className={cn('min-h-screen font-sans-kr antialiased', inter.className)}
       >
-        {children}
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

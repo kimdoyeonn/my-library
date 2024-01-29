@@ -1,0 +1,60 @@
+// prisma/schema.prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum AccountRole {
+  ADMIN
+  USER
+}
+
+model Account {
+  id    String      @id @default(uuid())
+  name  String
+  email String      @db.Text
+  role  AccountRole @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Book {
+  id        Int     @id @default(autoincrement())
+  title     String  @db.Text
+  author    String? @db.Text
+  imageUrl  String? @db.Text
+  publisher String? @db.Text
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model ReadingRoom {
+  id        Int    @id @default(autoincrement())
+  name      String
+  totalSeat Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  seats Seat[]
+}
+
+model Seat {
+  id Int @id @default(autoincrement())
+
+  readingRoomId Int
+  readingRoom   ReadingRoom @relation(fields: [readingRoomId], references: [id], onDelete: Cascade)
+
+  seatNumber Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
