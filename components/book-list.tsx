@@ -22,10 +22,14 @@ const Book = ({ book }: { book: BookType }) => {
 };
 
 const BookList = async () => {
-  const books = await db.book.findMany();
+  const books = await db.book.findMany({
+    orderBy: {
+      title: 'asc',
+    },
+  });
 
   return (
-    <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 col-span-4 gap-4'>
+    <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
       {books.map((book, idx) => (
         <Book key={idx} book={book} />
       ))}
