@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import AddBookDialog from './add-book-dialog';
+import BarcodeScanModal from './barcode-scan-madal';
 
 const AdminSection = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -54,7 +55,10 @@ const AdminSection = () => {
   return (
     <>
       {isAuthorized ? (
-        <AddBookDialog />
+        <>
+          <AddBookDialog />
+          <BarcodeScanModal />
+        </>
       ) : (
         <Dialog open={open} onOpenChange={(value) => setOpen(value)}>
           <DialogTrigger asChild>
@@ -100,7 +104,7 @@ const AdminSection = () => {
                 </div>
               </div>
               <DialogFooter>
-                <Button type='submit'>추가</Button>
+                <Button type='submit'>로그인</Button>
               </DialogFooter>
             </form>
           </DialogContent>

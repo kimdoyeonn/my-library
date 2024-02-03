@@ -2,7 +2,7 @@ import { db } from '@/lib/db';
 import { Book as BookType } from '@prisma/client';
 import Image from 'next/image';
 
-const Book = ({ book }: { book: BookType }) => {
+export const Book = ({ book }: { book: BookType }) => {
   return (
     <div className='relative overflow-hidden flex items-center flex-col gap-2'>
       <Image
