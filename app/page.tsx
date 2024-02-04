@@ -1,3 +1,5 @@
+export const revalidate = 10;
+
 import DarkModeToggle from '@/components/dark-mode-toggle';
 import BookList from '@/components/book-list';
 import AdminSection from '@/components/admin-section';
