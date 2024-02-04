@@ -18,7 +18,6 @@ import {
   QrcodeSuccessCallback,
 } from 'html5-qrcode';
 import { Html5QrcodeScannerConfig } from 'html5-qrcode/esm/html5-qrcode-scanner';
-import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
@@ -80,8 +79,9 @@ const BarcodeScanner = (
 
     return () => {
       // html5QrcodeScanner.current?.clear();
+      html5QrcodeScanner.current = null;
     };
-  }, []);
+  }, [html5QrcodeScanner, props]);
 
   return (
     <>
@@ -110,11 +110,8 @@ const BarcodeScanModal = () => {
   const html5QrcodeScanner = useRef<Html5QrcodeScanner | null>(null);
 
   const bookByIsbn = async (isbn: string) => {
-    const book = await axios.get('/api/kakao/search', {
-      params: {
-        isbn,
-      },
-    });
+    const res = await fetch(`/api/kakao/search?isbn=${isbn}`);
+    const book = await res.json();
 
     return book;
   };
@@ -125,7 +122,7 @@ const BarcodeScanModal = () => {
   ) => {
     try {
       const searchResult = await bookByIsbn(decodedText);
-      setSearchResult(searchResult.data.book[0]);
+      setSearchResult(searchResult.book[0]);
     } catch (error) {
       console.error('[SEARCH_BOOK] ', error);
     }
@@ -142,11 +139,14 @@ const BarcodeScanModal = () => {
     const { title, authors, publisher, thumbnail } = searchResult;
 
     try {
-      await axios.post('/api/books', {
-        title,
-        author: authors.reduce((cur, author) => `${cur} ${author}`),
-        publisher,
-        imageUrl: thumbnail,
+      await fetch('/api/books', {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          author: authors.reduce((cur, author) => `${cur} ${author}`),
+          publisher,
+          imageUrl: thumbnail,
+        }),
       });
       setOpen(false);
       setSearchResult(null);
@@ -161,19 +161,19 @@ const BarcodeScanModal = () => {
     html5QrcodeScanner.current?.resume();
   };
 
-  const initializeModal = () => {
+  const onOpenChange = (v: boolean) => {
     setSearchResult(null);
+    setOpen(v);
+    console.log('scanner', html5QrcodeScanner.current);
+    if (!v) {
+      html5QrcodeScanner.current?.clear();
+      html5QrcodeScanner.current = null;
+    }
   };
 
   return (
     <>
-      <Dialog
-        open={open}
-        onOpenChange={(v) => {
-          initializeModal();
-          setOpen(v);
-        }}
-      >
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogTrigger asChild>
           <Button variant='outline' size='icon'>
             <Barcode />
