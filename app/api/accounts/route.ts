@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { db } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -5,7 +7,7 @@ export async function GET(req: NextRequest) {
   try {
     const email = req.nextUrl.searchParams.get('email');
     const name = req.nextUrl.searchParams.get('name');
-    console.log(req.nextUrl.searchParams);
+
     if (!email) {
       return new NextResponse('email missing', { status: 400 });
     }
