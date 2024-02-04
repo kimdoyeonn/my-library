@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
       book: book.data.documents ?? [],
     });
   } catch (error) {
-    console.log('[BOOKS_GET]', error);
+    console.log('[BOOKS_GET]', process.env.KAKAO_REST_API_KEY, error);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
