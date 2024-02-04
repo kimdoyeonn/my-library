@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import axios from 'axios';
 import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -34,11 +33,14 @@ const AddBookDialog = () => {
     const { title, author, publisher, imageUrl } = getValues();
 
     try {
-      await axios.post('/api/books', {
-        title,
-        author,
-        publisher,
-        imageUrl,
+      await fetch('/api/books', {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          author,
+          publisher,
+          imageUrl,
+        }),
       });
       reset();
       setOpen(false);

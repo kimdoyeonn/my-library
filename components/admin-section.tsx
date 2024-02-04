@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import axios from 'axios';
 import { LogIn } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -35,9 +34,7 @@ const AdminSection = () => {
     try {
       const { name, email } = getValues();
 
-      const account = await axios.get('/api/accounts', {
-        params: { name, email },
-      });
+      const account = await fetch(`/api/accounts?name=${name}&email=${email}`);
       if (account) {
         setIsAuthorized(true);
       } else {
