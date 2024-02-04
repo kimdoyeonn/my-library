@@ -1,5 +1,5 @@
 # 우리집 도서관
-집에 있는 책들을 관리 + 도서관 시스템 클론코딩 프로젝트
+집에 있는 책들을 관리 + 도서관 시스템 따라만들기
 
 - 바코드 인식으로 책을 검색하여 저장합니다.
   ![___low-ezgif com-animated-gif-maker](https://github.com/kimdoyeonn/my-library/assets/53068706/8ae9a534-0421-4c6f-b65c-9b1bb20dc049)
